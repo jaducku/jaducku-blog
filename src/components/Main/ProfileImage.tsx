@@ -13,7 +13,7 @@ const ProfileImageWrapper = styled.img`
 `;
 
 const ProfileImage: FunctionComponent = () => {
-    return <ProfileImageWrapper src={PROFILE_IMAGE_LINK} alt="Profile Image" />;
+    return <ProfileImageWrapper src={PROFILE_IMAGE_LINK} alt="Profile" />;
 };
 
 export default ProfileImage;
