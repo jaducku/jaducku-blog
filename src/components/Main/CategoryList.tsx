@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from "react";
 import styled from "@emotion/styled";
 import { Link } from "gatsby";
 
-type CatetoryItemProps = {
+type CategoryItemProps = {
     active: boolean;
 }
 
@@ -10,8 +10,7 @@ type GatsbyLinkProps = {
     children: ReactNode;
     className?: string;
     to: string;
-} & CatetoryItemProps;
-
+} & CategoryItemProps;
 
 export interface CategoryListProps {
     selectedCategory: string;
@@ -20,25 +19,36 @@ export interface CategoryListProps {
     };
 }
 
-const CategoryItem = styled(({ active, to, ...props }: GatsbyLinkProps) => (
-    <Link to={to}{...props} />
-))`
-    margin-right: 20px;
-    padding: 5px;
-    font-size: 18px;
-    font-weight: ${({ active }) => (active ? '800' : '400')};
-    cursor: pointer;
+const CategoryListWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 768px;
+  margin: 100px auto 0;
 
-    &:last-of-type{
-        margin-right:0;
-    }
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 50px;
+    padding: 0 20px;
+  }
 `;
 
-const CategoryListWrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    width: 768px;
-    margin: 100px auto 0;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
+    <Link {...props} />
+)) <CategoryItemProps>`
+  margin-right: 20px;
+  padding: 5px 0;
+  font-size: 18px;
+  font-weight: ${({ active }) => (active ? '800' : '400')};
+  cursor: pointer;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const CategoryList: FunctionComponent<CategoryListProps> = ({
