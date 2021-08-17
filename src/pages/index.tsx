@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import GlobalStyle from 'components/Common/GlobalStyle';
-import Introduction from 'components/Main/Introduction';
+//import Footer from 'components/Common/Footer';
 import CategoryList from 'components/Main/CategoryList';
+import Introduction from 'components/Main/Introduction';
 import PostList from 'components/Main/PostList';
+import { graphql } from 'gatsby';
 
 const CATEGORY_LIST = {
     All: 5,
@@ -29,3 +31,26 @@ const IndexPage: FunctionComponent = function () {
 };
 
 export default IndexPage;
+
+export const queryPostList = graphql`
+  query queryPostList {
+    allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            summary
+            date(formatString: "YYYY.MM.DD.")
+            categories
+            thumbnail {
+              publicURL
+            }
+          }
+        }
+      }
+    }
+  }
+`;
